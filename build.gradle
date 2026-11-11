@@ -1,0 +1,57 @@
+buildscript {
+    repositories {
+        maven { url = 'https://nexus.gtnewhorizons.com/repository/public/' }
+        maven { url = 'https://maven.minecraftforge.net/' }
+        gradlePluginPortal()
+        mavenCentral()
+    }
+    dependencies {
+        // версию RetroFuturaGradle задаёт build.sh (-PrfgVersion)
+        classpath "com.gtnewhorizons.retrofuturagradle:com.gtnewhorizons.retrofuturagradle.gradle.plugin:${project.findProperty('rfgVersion') ?: '+'}"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'com.gtnewhorizons.retrofuturagradle'
+
+version = '3.0'
+group = 'com.ruststacks'
+
+base {
+    archivesName = 'ruststacks-1.12.2'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+minecraft {
+    mcVersion = '1.12.2'
+    username = 'Developer'
+    extraRunJvmArguments.add('-Dfml.coreMods.load=com.ruststacks.core.RustStacksPlugin')
+}
+
+repositories {
+    maven { url = 'https://maven.minecraftforge.net/' }
+    maven { url = 'https://nexus.gtnewhorizons.com/repository/public/' }
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'org.ow2.asm:asm-debug-all:5.2'
+}
+
+jar {
+    manifest {
+        attributes(
+            'FMLCorePlugin': 'com.ruststacks.core.RustStacksPlugin',
+            'FMLCorePluginContainsFMLMod': 'true'
+        )
+    }
+}

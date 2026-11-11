@@ -1,0 +1,13 @@
+[
+  {
+    "modid": "ruststacks",
+    "name": "Rust Stacks",
+    "description": "Стаки как в Rust (config/ruststacks.cfg). Стаки больше 64 корректно сохраняются, передаются по сети и не пропадают в инвентаре, сундуках и креативе.",
+    "version": "3.0",
+    "mcversion": "1.12.2",
+    "authorList": ["netrfloox"],
+    "credits": "",
+    "url": "",
+    "dependencies": []
+  }
+]
